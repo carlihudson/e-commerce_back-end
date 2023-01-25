@@ -44,6 +44,9 @@ Product.init(
         key: 'category_id',
       },
   },
+},
+{
+    sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
