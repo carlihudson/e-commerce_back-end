@@ -7,17 +7,11 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      attributes: ["product_id", "product_name", "price", "stock", "category_id"],
       include: [
+        Category,
         {
           model: Tag,
-          attributes: ["tag_id", "tag_name"], 
           through: ProductTag, 
-          as: 'product_tags'
-        },
-        {
-          model: Category, 
-          attributes: ["category_id", "category_name"],
         },
       ],
     });
