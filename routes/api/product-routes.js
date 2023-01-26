@@ -5,16 +5,21 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', async (req, res) => {
+  console.log("Get Route Start")
   try {
     const productData = await Product.findAll({
       include: [
-        Category,
+        {
+          model: Category,
+          attributes: ["category_name"]
+      },
         {
           model: Tag,
           through: ProductTag, 
         },
       ],
     });
+    console.log(productData)
     if (!productData) {
       res.status(404).json({ message: 'No product with this id!' });
       return;
@@ -24,6 +29,33 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// router.get('/', (req, res) => {    
+//   Product.findAll({    
+//     include: [    
+//       {    
+//         model: Category,    
+//         attributes: ['category_name']    
+//       },    
+//       {    
+//         model: Tag,    
+//         through: ProductTag,    
+//         attributes: ['tag_name']    
+//       }    
+//     ]    
+//   })    
+//     .then(productPostData => {    
+//       if (!productPostData) {    
+//         res.status(404).json({ message: 'No products found!' });    
+//           return;    
+//         }    
+//         res.json(productPostData);    
+//       })    
+//         .catch(err => {    
+//           console.log(err);    
+//           res.status(500).json(err);    
+//         });   
+//       });
   
 
 // get one product
