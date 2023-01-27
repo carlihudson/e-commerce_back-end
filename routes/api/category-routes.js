@@ -48,8 +48,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// EVERYTHING ABOVE THIS LINE IS WORKING 
-
   // create a new category
 router.post('/', async (req, res) => {
   try {
@@ -63,6 +61,8 @@ router.post('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// EVERYTHING ABOVE THIS LINE IS WORKING 
 
 // update a category by its `id` value
 router.put('/:id', async (req, res) => {
