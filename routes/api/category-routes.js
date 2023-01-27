@@ -4,14 +4,15 @@ const { Category, Product } = require('../../models');
 // The `/api/categories` endpoint
 
 // get all categories
+
 router.get('/', async (req, res) => {
   try {
     const categoryData = await Category.findAll({
-      attributes: ["category_id", "category_name"],
+      attributes: ["id", "name"],
       include: [
         {
           model: Product,
-          attributes: ["product_id", "product_name", "price", "stock", "category_id"]
+          attributes: ["id", "name", "price", "stock", "category_id"]
         },
       ],
     });
@@ -28,12 +29,12 @@ router.get('/', async (req, res) => {
 // get a single category by id
 router.get('/:id', async (req, res) => {
   try {
-    const singleCategory = await Category.findByPk(req.params.category_id, {
-      attributes: ["category_id", "category_name"],
+    const singleCategory = await Category.findByPk(req.params.id, {
+      attributes: ["id", "name"],
       include: [
         {
           model: Product,
-          attributes: ["product_id", "product_name", "price", "stock", "category_id"],
+          attributes: ["id", "name", "price", "stock", "category_id"],
         },
       ],
     });
@@ -47,8 +48,10 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+// EVERYTHING ABOVE THIS LINE IS WORKING 
+
   // create a new category
+router.post('/', async (req, res) => {
   try {
     const newCategory = await Category.create(req.body);
     if (!newCategory) {
