@@ -6,14 +6,13 @@ const { Tag, Product, ProductTag } = require('../../models');
 // get all tags
 router.get('/', async (req, res) => {
   try {
-    const tagData = await Category.findAll({
-      attributes: ["tag_id", "tag_name"],
+    const tagData = await Tag.findAll({
+      attributes: ["id", "name"],
       include: [
         {
           model: Product,
           attributes: ["id", "name", "price", "stock", "category_id"],
-          through: ProductTag,
-          as: 'route_tags'
+          through: ProductTag
         },
       ],
     });
@@ -30,14 +29,13 @@ router.get('/', async (req, res) => {
 // get single tag by id
 router.get('/:id', async (req, res) => {
   try {
-    const singleTag = await Category.findByPk(req.params.tag_id, {
+    const singleTag = await Tag.findByPk(req.params.id, {
       attributes: ["id", "name"],
       include: [
         {
           model: Product,
           attributes: ["id", "name", "price", "stock", "category_id"],
-          through: ProductTag, 
-          as: 'route_tag'
+          through: ProductTag 
         },
       ],
     });
@@ -50,6 +48,8 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// EVERYTHING ABOVE THIS LINE IS WORKING
 
 // create a new tag
 router.post('/', async (req, res) => {
