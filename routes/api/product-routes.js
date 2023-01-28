@@ -58,8 +58,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// EVERYTHING ABOVE THIS LINE IS WORKING
-
 // create new product
 router.post('/', async (req, res) => {
   Product.create(req.body)
@@ -83,6 +81,8 @@ router.post('/', async (req, res) => {
       res.status(400).json(err);
     });
 });
+
+// EVERYTHING ABOVE THIS LINE IS WORKING
 
 // update product
 router.put('/:id', (req, res) => {
