@@ -63,8 +63,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// EVERYTHING ABOVE THIS LINE IS WORKING
-
  // update a tag's name by its `id` value
 router.put('/:id', async (req, res) => {
   try {
@@ -88,11 +86,11 @@ router.delete('/:id', async (req, res) => {
   const tagToDelete = await Tag.findByPk(req.params.id)
   Tag.destroy({
     where: {
-      id: req.params.tag_id,
+      id: req.params.id,
     },
   })
   .then(() => {
-    res.json(`${tagToDelete} has been removed`)
+    res.json(`Tag has been removed`)
   })
   .catch((err) => {
     res.json(err);

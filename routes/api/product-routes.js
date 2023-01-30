@@ -82,8 +82,6 @@ router.post('/', async (req, res) => {
     });
 });
 
-// EVERYTHING ABOVE THIS LINE IS WORKING
-
 // update product
 router.put('/:id', (req, res) => {
   // update product data
@@ -126,11 +124,14 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// EVERYTHING ABOVE THIS LINE IS WORKING
+
+// delete product
 router.delete('/:id', async (req, res) => {
   try {
     const productToDelete = await Product.destroy({
       where: {
-        id: req.params.product_id,
+        id: req.params.id,
       },
     });
     if (!productToDelete) {

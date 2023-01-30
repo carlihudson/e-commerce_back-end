@@ -62,14 +62,12 @@ router.post('/', async (req, res) => {
   }
 });
 
-// EVERYTHING ABOVE THIS LINE IS WORKING 
-
 // update a category by its `id` value
 router.put('/:id', async (req, res) => {
   try {
     const categoryToUpdate = await Category.update(req.body, {
       where: {
-        category_id: req.params.category_id,
+        id: req.params.id,
       },
     });
     if (!categoryToUpdate[0]) {
@@ -87,7 +85,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const categoryToDelete = await Category.destroy({
       where: {
-        id: req.params.category_id,
+        id: req.params.id,
       },
     });
     if (!categoryToDelete) {
